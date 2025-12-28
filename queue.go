@@ -1,4 +1,4 @@
-package queue
+package main
 
 import "sync"
 
@@ -9,7 +9,7 @@ type Queue struct {
 	mu          sync.Mutex // Mutex locks
 }
 
-func (q *Queue) Enqueue(url string) {
+func (q *Queue) enqueue(url string) {
 	q.mu.Lock()
 	defer q.mu.Unlock()
 	q.elements = append(q.elements, url)
@@ -17,7 +17,7 @@ func (q *Queue) Enqueue(url string) {
 	q.number++
 }
 
-func (q *Queue) Dequeue() string {
+func (q *Queue) dequeue() string {
 	q.mu.Lock()
 	defer q.mu.Unlock()
 	url := q.elements[0]
@@ -26,7 +26,7 @@ func (q *Queue) Dequeue() string {
 	return url
 }
 
-func (q *Queue) Size() int {
+func (q *Queue) size() int {
 	q.mu.Lock()
 	defer q.mu.Unlock()
 	return q.number

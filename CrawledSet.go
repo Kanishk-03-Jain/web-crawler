@@ -1,4 +1,4 @@
-package crawledset
+package main
 
 import (
 	"hash/fnv"
@@ -11,20 +11,20 @@ type CrawledSet struct {
 	mu     sync.Mutex
 }
 
-func (c *CrawledSet) Add(url string) {
+func (c *CrawledSet) add(url string) {
 	c.mu.Lock()
 	defer c.mu.Unlock()
 	c.data[hashUrl(url)] = true
 	c.number++
 }
 
-func (c *CrawledSet) Contains(url string) bool {
+func (c *CrawledSet) contains(url string) bool {
 	c.mu.Lock()
 	defer c.mu.Unlock()
 	return c.data[hashUrl(url)]
 }
 
-func (c *CrawledSet) Size() int {
+func (c *CrawledSet) size() int {
 	c.mu.Lock()
 	defer c.mu.Unlock()
 	return c.number

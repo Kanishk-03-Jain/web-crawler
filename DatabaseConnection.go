@@ -1,10 +1,9 @@
-package databaseconnection
+package main
 
 import (
 	"context"
 	"os"
 
-	parsinghelpers "github.com/Kanishk-03-Jain/web-crawler/parsingHelpers"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -17,7 +16,7 @@ type DatabaseConnection struct {
 	collection *mongo.Collection
 }
 
-func (d *DatabaseConnection) Connect() {
+func (d *DatabaseConnection) connect() {
 	if d.access {
 		// Connect to database
 		d.uri = os.Getenv("MONGODB_URI")
@@ -33,13 +32,13 @@ func (d *DatabaseConnection) Connect() {
 	}
 }
 
-func (d *DatabaseConnection) Disconnect() {
+func (d *DatabaseConnection) disconnect() {
 	if d.access {
 		d.client.Disconnect(context.TODO())
 	}
 }
 
-func (d *DatabaseConnection) InsertWebpage(webpage parsinghelpers.Webpage) {
+func (d *DatabaseConnection) insertWebpage(webpage Webpage) {
 	if d.access {
 		d.collection.InsertOne(context.TODO(), webpage)
 	}
