@@ -5,8 +5,8 @@ import (
 	"os"
 
 	"go.mongodb.org/mongo-driver/bson"
-	"go.mongodb.org/mongo-driver/mongo"
-	"go.mongodb.org/mongo-driver/mongo/options"
+	"go.mongodb.org/mongo-driver/v2/mongo"
+	"go.mongodb.org/mongo-driver/v2/mongo/options"
 )
 
 type DatabaseConnection struct {
@@ -20,7 +20,7 @@ func (d *DatabaseConnection) connect() {
 	if d.access {
 		// Connect to database
 		d.uri = os.Getenv("MONGODB_URI")
-		client, err := mongo.Connect(context.TODO(), options.Client().ApplyURI(d.uri))
+		client, err := mongo.Connect(options.Client().ApplyURI(d.uri))
 		if err != nil {
 			panic(err)
 		}
