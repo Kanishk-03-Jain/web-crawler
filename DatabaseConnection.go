@@ -28,7 +28,7 @@ func (d *DatabaseConnection) connect() {
 		d.client = client
 		d.collection = d.client.Database("webCrawlerArchive").Collection("webpages")
 		filter := bson.D{{}}
-		// Delete all documents in the collection
+		// Delete all documents in the collection from previous crawl
 		d.collection.DeleteMany(context.TODO(), filter)
 	}
 }
