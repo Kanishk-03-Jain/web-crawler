@@ -19,7 +19,6 @@ type Webpage struct {
 // gets links from html webpage tokens
 func getHref(t html.Token) (ok bool, href string) {
 	for _, a := range t.Attr {
-		fmt.Printf("%s %s %s", a.Key, a.Namespace, a.Val)
 		if a.Key == "href" {
 			if len(a.Val) == 0 || !strings.HasPrefix(a.Val, "http") {
 				ok = false
@@ -37,17 +36,20 @@ func getHref(t html.Token) (ok bool, href string) {
 func fetchPage(url string, c chan []byte) {
 	client := &http.Client{}
 
-	req, err := client.NewRequest()
-
-	res, err := http.Get(url)
+	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
-		body := []byte("")
-		c <- body
-		return
+		panic(err)
 	}
+
+	req.Header.Set("User-Agent", "MyBot/1.0")
+
+	res, err := client.Do(req)
+	if err != nil {
+		panic(err)
+	}
+
 	defer res.Body.Close()
 	body, err := io.ReadAll(res.Body)
-	fmt.Printf("%s", body)
 	if err != nil {
 		body = []byte("")
 	}
