@@ -3,6 +3,7 @@
 A high-performance, concurrent web crawler built in Go that crawls websites, extracts links, and stores webpage data in MongoDB. The crawler includes real-time statistics tracking, duplicate URL detection, and efficient queue management.
 
 ## Architecture
+![Architecture](images/architecture.png)
 
 The crawler consists of several key components:
 
