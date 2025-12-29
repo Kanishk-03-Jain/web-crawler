@@ -9,6 +9,7 @@ type Queue struct {
 	mu          sync.Mutex // Mutex locks
 }
 
+// push url into queue
 func (q *Queue) enqueue(url string) {
 	q.mu.Lock()
 	defer q.mu.Unlock()
@@ -17,6 +18,7 @@ func (q *Queue) enqueue(url string) {
 	q.number++
 }
 
+// pop url from queue
 func (q *Queue) dequeue() string {
 	q.mu.Lock()
 	defer q.mu.Unlock()
@@ -26,6 +28,7 @@ func (q *Queue) dequeue() string {
 	return url
 }
 
+// get size of queue
 func (q *Queue) size() int {
 	q.mu.Lock()
 	defer q.mu.Unlock()

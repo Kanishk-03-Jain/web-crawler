@@ -18,7 +18,9 @@ func main() {
 	db.connect()
 
 	crawled := CrawledSet{data: make(map[uint64]bool)}
-	seed := "https://en.wikipedia.org/wiki/Kanishka"
+	var seed string
+	fmt.Println("Enter the seed URL:")
+	fmt.Scanf("%s", &seed)
 	queue := Queue{totalQueued: 0, number: 0, elements: make([]string, 0)}
 
 	ticker := time.NewTicker(1 * time.Minute)
