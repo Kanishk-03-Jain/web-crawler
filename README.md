@@ -146,4 +146,4 @@ web-crawler/
 **Kanishk Jain**
 - GitHub: [@Kanishk-03-Jain](https://github.com/Kanishk-03-Jain)
 
-**Note**: Make sure to respect website terms of service and robots.txt when crawling. Use responsibly and ethically.
+**Note**: Make sure to respect website terms of service and robots.txt when crawling. Use responsibly and ethically. 
